@@ -4,90 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SneakerFlipSim</title>
-  <style>
-    body {
-      background-color: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      color: white;
-      margin-bottom: 10px;
-    }
-
-    .form-container {
-      margin: 30px auto;
-      max-width: 400px;
-    }
-
-    .input-field,
-    select {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 12px 0;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .btn-run {
-      background-color: #ff4500;
-      color: white;
-    }
-
-    .btn-beta {
-      background-color: #00cc66;
-      color: white;
-    }
-
-    .section {
-      margin: 60px auto;
-      max-width: 600px;
-    }
-
-    footer {
-      margin-top: 80px;
-      color: #777;
-    }
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <h1>SneakerFlipSim</h1>
   <p>Predict your sneaker profits before you buy.</p>
 
   <div class="form-container">
-    <input class="input-field" type="text" placeholder="Sneaker Name or SKU" />
-    <input class="input-field" type="text" placeholder="Size (e.g. 10.5)" />
-    <select class="input-field">
+    <input class="input-field" type="text" placeholder="Sneaker Name or SKU" id="sneakerName">
+    <input class="input-field" type="text" placeholder="Size (e.g. 10.5)" id="size">
+    <select class="input-field" id="condition">
       <option disabled selected>Condition</option>
       <option>New</option>
       <option>Used</option>
     </select>
-    <input class="input-field" type="number" placeholder="Your Buy Price ($)" />
-    <select class="input-field">
+    <input class="input-field" type="number" placeholder="Your Buy Price ($)" id="buyPrice">
+    <select class="input-field" id="platform">
       <option disabled selected>Selling Platform</option>
       <option>StockX</option>
       <option>GOAT</option>
       <option>eBay</option>
       <option>Other</option>
     </select>
-    <button class="btn btn-run">Run Simulation</button>
+    <button class="btn btn-run" onclick="runSimulation()">Run Simulation</button>
   </div>
 
   <div class="section">
@@ -98,12 +37,14 @@
   <div class="section">
     <h2>Join the Beta List</h2>
     <p>Get early access + first-month free for being a launch user.</p>
-    <input class="input-field" type="email" placeholder="Your email address" />
-    <button class="btn btn-beta">Join Beta</button>
+    <input class="input-field" type="email" placeholder="Your email address" id="email">
+    <button class="btn btn-beta" onclick="joinBeta()">Join Beta</button>
   </div>
 
   <footer>
     © 2025 SimSage. All rights reserved.
   </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
