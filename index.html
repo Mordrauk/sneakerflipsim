@@ -1,63 +1,138 @@
-<!-- SneakerFlipSim Landing Page (Framer HTML structure, AI-ready) -->
-<!-- You can import this into your Framer project manually, or recreate based on these specs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SneakerFlipSim</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      text-align: center;
+    }
 
-<!-- === HEADER === -->
-<section style="background-color: #0d0d0d; color: white; padding: 80px 20px; font-family: sans-serif;">
-  <div style="max-width: 800px; margin: auto; text-align: center;">
-    <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">SneakerFlipSim</h1>
-    <p style="font-size: 20px; color: #aaa;">Predict your sneaker profits before you buy.</p>
-  </div>
-</section>
+    header {
+      padding: 40px 0 10px;
+    }
 
-<!-- === SIMULATION FORM === -->
-<section style="background-color: #121212; color: white; padding: 60px 20px;">
-  <div style="max-width: 600px; margin: auto;">
-    <form id="sim-form" style="display: flex; flex-direction: column; gap: 20px;">
-      <input placeholder="Sneaker Name or SKU" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
-      <input placeholder="Size (e.g. 10.5)" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
-      <select style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;">
-        <option value="">Condition</option>
-        <option>New (Deadstock)</option>
-        <option>Like New</option>
-        <option>Used</option>
-      </select>
-      <input placeholder="Your Buy Price ($)" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
-      <select style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;">
-        <option value="">Selling Platform</option>
-        <option>StockX</option>
-        <option>GOAT</option>
-        <option>eBay</option>
-      </select>
-      <button type="submit" style="padding: 14px; font-size: 18px; font-weight: bold; background-color: #ff4d00; color: white; border: none; border-radius: 6px; cursor: pointer;">
-        Run Simulation
-      </button>
+    header h1 {
+      font-size: 2em;
+      margin-bottom: 0.25em;
+    }
+
+    form {
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 400px;
+    }
+
+    input, select, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: none;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #ff4500;
+      color: white;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 40px 20px;
+    }
+
+    .footer {
+      background-color: #0d0d0d;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SneakerFlipSim</h1>
+    <p>Predict your sneaker profits before you buy.</p>
+  </header>
+
+  <form>
+    <input id="sneakerName" type="text" placeholder="Sneaker Name or SKU" required />
+    <input id="sneakerSize" type="text" placeholder="Size (e.g. 10.5)" required />
+    <select id="sneakerCondition" required>
+      <option value="">Condition</option>
+      <option value="New">New</option>
+      <option value="Used - Like New">Used - Like New</option>
+      <option value="Used - Good">Used - Good</option>
+    </select>
+    <input id="buyPrice" type="number" placeholder="Your Buy Price ($)" required />
+    <select id="sellingPlatform" required>
+      <option value="">Selling Platform</option>
+      <option value="StockX">StockX</option>
+      <option value="GOAT">GOAT</option>
+      <option value="eBay">eBay</option>
+    </select>
+    <button type="submit">Run Simulation</button>
+  </form>
+
+  <section>
+    <h2>How It Works</h2>
+    <p>
+      Enter your sneaker details, and our AI simulation engine (powered by GPT-4o) will estimate your
+      profit, ROI, and flip risk based on real-world resale trends.
+    </p>
+  </section>
+
+  <section>
+    <h2>Join the Beta List</h2>
+    <p>Get early access + first-month free for being a launch user.</p>
+    <form>
+      <input type="email" placeholder="Your email address" />
+      <button type="submit" style="background-color: #00c853;">Join Beta</button>
     </form>
+  </section>
+
+  <div class="footer">
+    © 2025 SimSage. All rights reserved.
   </div>
-</section>
 
-<!-- === HOW IT WORKS === -->
-<section style="background-color: #1e1e1e; color: white; padding: 60px 20px;">
-  <div style="max-width: 700px; margin: auto; text-align: center;">
-    <h2 style="font-size: 28px; font-weight: bold; margin-bottom: 20px;">How It Works</h2>
-    <p style="font-size: 16px; color: #ccc;">Enter your sneaker details, and our AI simulation engine (powered by GPT-4o) will estimate your profit, ROI, and flip risk based on real-world resale trends.</p>
-  </div>
-</section>
+  <script>
+    document.querySelectorAll("form")[0]?.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-<!-- === EMAIL CAPTURE === -->
-<section style="background-color: #121212; color: white; padding: 60px 20px;">
-  <div style="max-width: 600px; margin: auto; text-align: center;">
-    <h3 style="font-size: 24px; margin-bottom: 10px;">Join the Beta List</h3>
-    <p style="font-size: 16px; color: #ccc;">Get early access + first-month free for being a launch user.</p>
-    <input placeholder="Your email address" style="padding: 12px; font-size: 16px; width: 80%; max-width: 400px; margin-top: 12px; border-radius: 6px; border: none;" />
-    <button style="margin-top: 10px; padding: 12px 24px; font-size: 16px; font-weight: bold; background-color: #00cc66; color: white; border: none; border-radius: 6px; cursor: pointer;">
-      Join Beta
-    </button>
-  </div>
-</section>
+      const sneaker = document.getElementById("sneakerName").value.trim();
+      const size = document.getElementById("sneakerSize").value.trim();
+      const condition = document.getElementById("sneakerCondition").value;
+      const buyPrice = parseFloat(document.getElementById("buyPrice").value);
+      const platform = document.getElementById("sellingPlatform").value;
 
-<!-- === FOOTER === -->
-<footer style="background-color: #0d0d0d; color: #777; text-align: center; padding: 20px; font-size: 14px;">
-  © 2025 SimSage. All rights reserved.
-</footer>
+      if (!sneaker || !size || !condition || !buyPrice || !platform) {
+        alert("Please fill in all fields.");
+        return;
+      }
 
-<!-- GPT logic and Make.com connection will be embedded after form submission -->
+      const platformFee = platform === "StockX" ? 0.13 : 0.10;
+      const resaleValue = buyPrice * (1 + Math.random() * 0.4);
+      const profit = resaleValue * (1 - platformFee) - buyPrice;
+      const roi = ((profit / buyPrice) * 100).toFixed(2);
+
+      alert(
+        `Sneaker: ${sneaker}\nSize: ${size}\nCondition: ${condition}\nPlatform: ${platform}\nBuy Price: $${buyPrice.toFixed(
+          2
+        )}\nEstimated Resale: $${resaleValue.toFixed(
+          2
+        )}\nEstimated Profit: $${profit.toFixed(
+          2
+        )}\nEstimated ROI: ${roi}%`
+      );
+    });
+  </script>
+</body>
+</html>
