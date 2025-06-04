@@ -1,0 +1,63 @@
+<!-- SneakerFlipSim Landing Page (Framer HTML structure, AI-ready) -->
+<!-- You can import this into your Framer project manually, or recreate based on these specs -->
+
+<!-- === HEADER === -->
+<section style="background-color: #0d0d0d; color: white; padding: 80px 20px; font-family: sans-serif;">
+  <div style="max-width: 800px; margin: auto; text-align: center;">
+    <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 10px;">SneakerFlipSim</h1>
+    <p style="font-size: 20px; color: #aaa;">Predict your sneaker profits before you buy.</p>
+  </div>
+</section>
+
+<!-- === SIMULATION FORM === -->
+<section style="background-color: #121212; color: white; padding: 60px 20px;">
+  <div style="max-width: 600px; margin: auto;">
+    <form id="sim-form" style="display: flex; flex-direction: column; gap: 20px;">
+      <input placeholder="Sneaker Name or SKU" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
+      <input placeholder="Size (e.g. 10.5)" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
+      <select style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;">
+        <option value="">Condition</option>
+        <option>New (Deadstock)</option>
+        <option>Like New</option>
+        <option>Used</option>
+      </select>
+      <input placeholder="Your Buy Price ($)" style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;" />
+      <select style="padding: 12px; font-size: 16px; border-radius: 6px; border: none;">
+        <option value="">Selling Platform</option>
+        <option>StockX</option>
+        <option>GOAT</option>
+        <option>eBay</option>
+      </select>
+      <button type="submit" style="padding: 14px; font-size: 18px; font-weight: bold; background-color: #ff4d00; color: white; border: none; border-radius: 6px; cursor: pointer;">
+        Run Simulation
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- === HOW IT WORKS === -->
+<section style="background-color: #1e1e1e; color: white; padding: 60px 20px;">
+  <div style="max-width: 700px; margin: auto; text-align: center;">
+    <h2 style="font-size: 28px; font-weight: bold; margin-bottom: 20px;">How It Works</h2>
+    <p style="font-size: 16px; color: #ccc;">Enter your sneaker details, and our AI simulation engine (powered by GPT-4o) will estimate your profit, ROI, and flip risk based on real-world resale trends.</p>
+  </div>
+</section>
+
+<!-- === EMAIL CAPTURE === -->
+<section style="background-color: #121212; color: white; padding: 60px 20px;">
+  <div style="max-width: 600px; margin: auto; text-align: center;">
+    <h3 style="font-size: 24px; margin-bottom: 10px;">Join the Beta List</h3>
+    <p style="font-size: 16px; color: #ccc;">Get early access + first-month free for being a launch user.</p>
+    <input placeholder="Your email address" style="padding: 12px; font-size: 16px; width: 80%; max-width: 400px; margin-top: 12px; border-radius: 6px; border: none;" />
+    <button style="margin-top: 10px; padding: 12px 24px; font-size: 16px; font-weight: bold; background-color: #00cc66; color: white; border: none; border-radius: 6px; cursor: pointer;">
+      Join Beta
+    </button>
+  </div>
+</section>
+
+<!-- === FOOTER === -->
+<footer style="background-color: #0d0d0d; color: #777; text-align: center; padding: 20px; font-size: 14px;">
+  © 2025 SimSage. All rights reserved.
+</footer>
+
+<!-- GPT logic and Make.com connection will be embedded after form submission -->
