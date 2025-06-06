@@ -1,48 +1,36 @@
 function runSimulation() {
-  const name = document.getElementById("sneakerName").value.trim();
-  const size = document.getElementById("size").value.trim();
+  const name = document.getElementById("sneakerName").value;
+  const size = document.getElementById("size").value;
   const sizeUnit = document.getElementById("sizeUnit").value;
   const condition = document.getElementById("condition").value;
   const price = parseFloat(document.getElementById("buyPrice").value);
   const platform = document.getElementById("platform").value;
-  const resultBox = document.getElementById("result");
 
-  if (!name || !size || !condition || !platform || isNaN(price)) {
-    alert("Please fill out all fields before running the simulation.");
+  if (!name || !size || !condition || !price || !platform) {
+    alert("Please complete all fields before running the simulation.");
     return;
   }
 
-  // Simulated resale value logic by condition
-  const baseMarkup = {
-    DS: 1.8,
-    VNDS: 1.6,
-    NDS: 1.5,
-    EX: 1.4,
-    VG: 1.3,
-    G: 1.2,
-    F: 1.1,
-    B: 1.0,
+  const resaleMap = {
+    DS: 220,
+    VNDS: 200,
+    NDS: 185,
+    EX: 170,
+    VG: 156,
+    G: 140,
+    F: 120,
+    B: 90
   };
 
-  // Platform fees (rough averages)
-  const platformFees = {
-    StockX: 0.12,
-    GOAT: 0.14,
-    eBay: 0.13,
-    Other: 0.15,
-  };
+  const resale = resaleMap[condition] || 150;
+  const profit = resale - price;
+  const roi = ((profit / price) * 100).toFixed(1);
 
-  const markup = baseMarkup[condition] || 1.0;
-  const resale = +(price * markup).toFixed(2);
-  const fee = +(resale * (platformFees[platform] || 0.15)).toFixed(2);
-  const profit = +(resale - price - fee).toFixed(2);
-  const roi = +((profit / price) * 100).toFixed(1);
+  let risk = "Medium";
+  if (roi >= 40) risk = "Low";
+  else if (roi <= 10) risk = "High";
 
-  let risk = "Low";
-  if (markup <= 1.2) risk = "High";
-  else if (markup <= 1.4) risk = "Medium";
-
-  // Display simulated result
+  const resultBox = document.getElementById("result");
   resultBox.innerHTML = `
     <h3>Simulation Results</h3>
     <p><strong>Sneaker:</strong> ${name}</p>
@@ -50,23 +38,82 @@ function runSimulation() {
     <p><strong>Condition:</strong> ${condition}</p>
     <p><strong>Platform:</strong> ${platform}</p>
     <p><strong>Estimated Resale Value:</strong> $${resale}</p>
-    <p><strong>Estimated Profit:</strong> $${profit}</p>
+    <p><strong>Estimated Profit:</strong> $${profit.toFixed(2)}</p>
     <p><strong>Estimated ROI:</strong> ${roi}%</p>
     <p><strong>Flip Risk:</strong> ${risk}</p>
   `;
   resultBox.style.display = "block";
+
+  renderPriceChart(resale);
 }
 
 function joinBeta() {
-  const email = document.getElementById("email").value.trim();
-  if (!email) {
-    alert("Please enter your email.");
-    return;
-  }
+  const email = document.getElementById("email").value;
+  if (!email) return alert("Please enter a valid email address.");
   alert(`Thanks for signing up, ${email}!`);
 }
 
 function toggleHelp() {
   const help = document.getElementById("conditionHelp");
   help.style.display = help.style.display === "block" ? "none" : "block";
+}
+
+let priceChartInstance = null;
+
+function renderPriceChart(latestValue) {
+  const ctx = document.getElementById("priceChart").getContext("2d");
+  const labels = ["6 mo ago", "5 mo", "4 mo", "3 mo", "2 mo", "Last mo", "Now"];
+  const base = latestValue * 0.85;
+  const data = Array.from({ length: 6 }, (_, i) =>
+    Math.round(base + Math.random() * (latestValue - base))
+  ).concat([latestValue]);
+
+  if (priceChartInstance) {
+    priceChartInstance.destroy();
+  }
+
+  priceChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Resale Price Trend ($)",
+        data: data,
+        borderColor: "#00ccff",
+        backgroundColor: "rgba(0,204,255,0.1)",
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: "#00ccff"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#eee"
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#ccc"
+          },
+          grid: {
+            color: "#333"
+          }
+        },
+        y: {
+          ticks: {
+            color: "#ccc"
+          },
+          grid: {
+            color: "#333"
+          }
+        }
+      }
+    }
+  });
 }
