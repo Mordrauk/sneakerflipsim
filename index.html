@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SneakerFlipSim</title>
-  <link rel="stylesheet" href="css/main.css?v=1.0.5">
+  <link rel="stylesheet" href="css/main.css?v=1.0.6">
 </head>
 <body>
   <div class="page-wrapper">
@@ -13,7 +13,17 @@
 
     <div class="form-container">
       <input class="input-field" type="text" placeholder="Sneaker Name or SKU" id="sneakerName">
-      <input class="input-field" type="text" placeholder="Size (e.g. 10.5)" id="size">
+
+      <div class="size-row">
+        <select class="input-field size-unit" id="sizeUnit">
+          <option value="US" selected>US</option>
+          <option value="UK">UK</option>
+          <option value="EU">EU</option>
+          <option value="CM">CM</option>
+        </select>
+        <input class="input-field size-value" type="text" placeholder="Size (e.g. 10.5)" id="size">
+      </div>
+
       <select class="input-field" id="condition">
         <option disabled selected>Condition</option>
         <option value="DS">Deadstock (DS)</option>
@@ -25,7 +35,9 @@
         <option value="F">Fair</option>
         <option value="B">Beaters</option>
       </select>
+
       <input class="input-field" type="number" placeholder="Your Buy Price ($)" id="buyPrice">
+
       <select class="input-field" id="platform">
         <option disabled selected>Selling Platform</option>
         <option>StockX</option>
@@ -33,6 +45,7 @@
         <option>eBay</option>
         <option>Other</option>
       </select>
+
       <button class="btn btn-run" onclick="runSimulation()">Run Simulation</button>
 
       <button class="expand-toggle" onclick="toggleHelp()">
