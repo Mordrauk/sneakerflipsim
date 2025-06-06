@@ -42,27 +42,16 @@ p {
 
 .size-row {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
   width: 100%;
+  gap: 10px;
 }
 
 .size-unit {
   width: 30%;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
 .size-value {
   width: 70%;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
 .btn {
@@ -83,6 +72,30 @@ p {
 .btn-beta {
   background-color: #00cc66;
   color: white;
+  margin-top: 20px;
+}
+
+.expand-toggle {
+  background: none;
+  color: #00ccff;
+  text-decoration: underline;
+  border: none;
+  margin: 15px 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.expandable-help {
+  display: none;
+  background-color: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section {
@@ -100,27 +113,12 @@ footer {
   text-align: center;
 }
 
-/* Expandable Help Styles */
-.expand-toggle {
-  background: none;
-  border: none;
-  color: #00ccff;
-  text-decoration: underline;
-  cursor: pointer;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.expandable-help {
-  display: none;
-  text-align: left;
-  margin-top: 20px;
+.result-box {
   background-color: #222;
   padding: 15px;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.expandable-help p {
-  margin: 8px 0;
+  border-radius: 6px;
+  margin-top: 20px;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
 }
