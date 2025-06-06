@@ -74,3 +74,28 @@ footer {
   font-size: 12px;
   text-align: center;
 }
+
+/* Expandable Help Styles */
+.expand-toggle {
+  background: none;
+  border: none;
+  color: #00ccff;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.expandable-help {
+  display: none;
+  text-align: left;
+  margin-top: 20px;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.expandable-help p {
+  margin: 8px 0;
+}

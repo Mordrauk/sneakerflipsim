@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SneakerFlipSim</title>
-  <link rel="stylesheet" href="css/main.css?v=1.0.4">
+  <link rel="stylesheet" href="css/main.css?v=1.0.5">
 </head>
 <body>
   <div class="page-wrapper">
-
     <h1>SneakerFlipSim</h1>
     <p>Predict your sneaker profits before you buy.</p>
 
@@ -17,8 +16,14 @@
       <input class="input-field" type="text" placeholder="Size (e.g. 10.5)" id="size">
       <select class="input-field" id="condition">
         <option disabled selected>Condition</option>
-        <option>New</option>
-        <option>Used</option>
+        <option value="DS">Deadstock (DS)</option>
+        <option value="VNDS">Very Near Deadstock (VNDS)</option>
+        <option value="NDS">Near Deadstock (NDS)</option>
+        <option value="EX">Excellent</option>
+        <option value="VG">Very Good</option>
+        <option value="G">Good</option>
+        <option value="F">Fair</option>
+        <option value="B">Beaters</option>
       </select>
       <input class="input-field" type="number" placeholder="Your Buy Price ($)" id="buyPrice">
       <select class="input-field" id="platform">
@@ -29,6 +34,21 @@
         <option>Other</option>
       </select>
       <button class="btn btn-run" onclick="runSimulation()">Run Simulation</button>
+
+      <button class="expand-toggle" onclick="toggleHelp()">
+        ❓ What do the sneaker condition terms mean?
+      </button>
+
+      <div class="expandable-help" id="conditionHelp">
+        <p><strong>Deadstock (DS):</strong> Brand new, never worn, typically with original box and tags.</p>
+        <p><strong>Very Near Deadstock (VNDS):</strong> Worn once or twice with minimal signs of wear; appears almost new.</p>
+        <p><strong>Near Deadstock (NDS):</strong> Lightly worn with slight signs of use, such as minor creasing.</p>
+        <p><strong>Excellent:</strong> Gently worn with minimal wear on soles and uppers; well-maintained.</p>
+        <p><strong>Very Good:</strong> Noticeable wear on soles and uppers but no major flaws; still in good shape.</p>
+        <p><strong>Good:</strong> Visible signs of wear, including creasing and scuffs; structurally sound.</p>
+        <p><strong>Fair:</strong> Heavily worn with significant signs of use; may have minor defects.</p>
+        <p><strong>Beaters:</strong> Extensively worn, often used for daily activities; may have significant wear and tear.</p>
+      </div>
     </div>
 
     <div class="section">
@@ -46,9 +66,14 @@
     <footer>
       © 2025 SimSage. All rights reserved.
     </footer>
-
   </div>
 
   <script src="/js/app.js"></script>
+  <script>
+    function toggleHelp() {
+      const helpBox = document.getElementById('conditionHelp');
+      helpBox.style.display = helpBox.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
