@@ -1,10 +1,25 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #111;
   color: white;
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  min-height: 100vh;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 600px;
   padding: 20px;
-  margin: 0;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -13,7 +28,7 @@ h1 {
 
 .form-container {
   margin: 30px auto;
-  max-width: 400px;
+  width: 100%;
 }
 
 .input-field {
@@ -47,16 +62,11 @@ h1 {
 }
 
 .section {
-  margin: 60px auto;
-  max-width: 600px;
-}
-
-.page-wrapper {
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 60px 0;
 }
 
 footer {
-  margin-top: 80px;
+  margin-top: 60px;
+  font-size: 14px;
   color: #777;
 }
