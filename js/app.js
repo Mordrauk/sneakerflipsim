@@ -6,29 +6,30 @@ function runSimulation() {
   const price = parseFloat(document.getElementById("buyPrice").value);
   const platform = document.getElementById("platform").value;
 
-  if (!name || !size || !condition || !price || !platform) {
-    alert("Please complete all fields before running the simulation.");
-    return;
-  }
-
-  const resaleMap = {
-    DS: 220,
-    VNDS: 200,
-    NDS: 185,
-    EX: 170,
-    VG: 156,
-    G: 140,
-    F: 120,
-    B: 90
+  // Basic pricing estimate logic
+  let resaleValue = 150;
+  const conditionMultipliers = {
+    DS: 1.1,
+    VNDS: 1.05,
+    NDS: 1.0,
+    EX: 0.95,
+    VG: 0.9,
+    G: 0.85,
+    F: 0.75,
+    B: 0.6
   };
 
-  const resale = resaleMap[condition] || 150;
-  const profit = resale - price;
+  if (conditionMultipliers[condition]) {
+    resaleValue *= conditionMultipliers[condition];
+  }
+
+  resaleValue = Math.round(resaleValue);
+  const profit = resaleValue - price;
   const roi = ((profit / price) * 100).toFixed(1);
 
   let risk = "Medium";
-  if (roi >= 40) risk = "Low";
-  else if (roi <= 10) risk = "High";
+  if (roi > 40) risk = "Low";
+  if (roi < 10) risk = "High";
 
   const resultBox = document.getElementById("result");
   resultBox.innerHTML = `
@@ -37,81 +38,68 @@ function runSimulation() {
     <p><strong>Size:</strong> ${size} (${sizeUnit})</p>
     <p><strong>Condition:</strong> ${condition}</p>
     <p><strong>Platform:</strong> ${platform}</p>
-    <p><strong>Estimated Resale Value:</strong> $${resale}</p>
+    <p><strong>Estimated Resale Value:</strong> $${resaleValue}</p>
     <p><strong>Estimated Profit:</strong> $${profit.toFixed(2)}</p>
     <p><strong>Estimated ROI:</strong> ${roi}%</p>
     <p><strong>Flip Risk:</strong> ${risk}</p>
   `;
   resultBox.style.display = "block";
 
-  renderPriceChart(resale);
+  showChart();
 }
 
 function joinBeta() {
   const email = document.getElementById("email").value;
-  if (!email) return alert("Please enter a valid email address.");
   alert(`Thanks for signing up, ${email}!`);
 }
 
 function toggleHelp() {
   const help = document.getElementById("conditionHelp");
-  help.style.display = help.style.display === "block" ? "none" : "block";
+  help.classList.toggle("expanded");
 }
 
-let priceChartInstance = null;
-
-function renderPriceChart(latestValue) {
+function showChart() {
   const ctx = document.getElementById("priceChart").getContext("2d");
-  const labels = ["6 mo ago", "5 mo", "4 mo", "3 mo", "2 mo", "Last mo", "Now"];
-  const base = latestValue * 0.85;
-  const data = Array.from({ length: 6 }, (_, i) =>
-    Math.round(base + Math.random() * (latestValue - base))
-  ).concat([latestValue]);
+  const container = document.querySelector(".chart-container");
 
-  if (priceChartInstance) {
-    priceChartInstance.destroy();
+  container.style.display = "block";
+  container.classList.remove("fade-in");
+  void container.offsetWidth; // force reflow
+  container.classList.add("fade-in");
+
+  if (window.priceChart) {
+    window.priceChart.destroy();
   }
 
-  priceChartInstance = new Chart(ctx, {
-    type: "line",
+  window.priceChart = new Chart(ctx, {
+    type: 'line',
     data: {
-      labels: labels,
+      labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
       datasets: [{
-        label: "Resale Price Trend ($)",
-        data: data,
-        borderColor: "#00ccff",
-        backgroundColor: "rgba(0,204,255,0.1)",
-        fill: true,
+        label: 'Resale Price Trend ($)',
+        data: [148, 146, 145, 136, 138, 137, 156],
+        fill: false,
+        borderColor: '#00ccff',
+        backgroundColor: '#00ccff',
         tension: 0.3,
         pointRadius: 4,
-        pointBackgroundColor: "#00ccff"
+        pointHoverRadius: 6
       }]
     },
     options: {
-      responsive: true,
       plugins: {
         legend: {
           labels: {
-            color: "#eee"
+            color: 'white'
           }
         }
       },
       scales: {
         x: {
-          ticks: {
-            color: "#ccc"
-          },
-          grid: {
-            color: "#333"
-          }
+          ticks: { color: 'white' }
         },
         y: {
-          ticks: {
-            color: "#ccc"
-          },
-          grid: {
-            color: "#333"
-          }
+          ticks: { color: 'white' }
         }
       }
     }
