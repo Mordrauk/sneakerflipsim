@@ -29,7 +29,7 @@ function runSimulation() {
 
   let risk = "Medium";
   if (roi > 40) risk = "Low";
-  if (roi < 10) risk = "High";
+  else if (roi < 10) risk = "High";
 
   const resultBox = document.getElementById("result");
   resultBox.innerHTML = `
@@ -45,7 +45,7 @@ function runSimulation() {
   `;
   resultBox.style.display = "block";
 
-  showChart();
+  showChart(); // Call chart render after result
 }
 
 function joinBeta() {
@@ -59,49 +59,51 @@ function toggleHelp() {
 }
 
 function showChart() {
-  const ctx = document.getElementById("priceChart").getContext("2d");
   const container = document.querySelector(".chart-container");
-
   container.style.display = "block";
   container.classList.remove("fade-in");
-  void container.offsetWidth; // force reflow
+  void container.offsetWidth; // Force reflow
   container.classList.add("fade-in");
 
-  if (window.priceChart) {
-    window.priceChart.destroy();
-  }
+  setTimeout(() => {
+    const ctx = document.getElementById("priceChart").getContext("2d");
 
-  window.priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
-      datasets: [{
-        label: 'Resale Price Trend ($)',
-        data: [148, 146, 145, 136, 138, 137, 156],
-        fill: false,
-        borderColor: '#00ccff',
-        backgroundColor: '#00ccff',
-        tension: 0.3,
-        pointRadius: 4,
-        pointHoverRadius: 6
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: 'white'
+    if (window.priceChart) {
+      window.priceChart.destroy();
+    }
+
+    window.priceChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
+        datasets: [{
+          label: 'Resale Price Trend ($)',
+          data: [148, 146, 145, 136, 138, 137, 156],
+          fill: false,
+          borderColor: '#00ccff',
+          backgroundColor: '#00ccff',
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: 'white' }
+          },
+          y: {
+            ticks: { color: 'white' }
           }
         }
-      },
-      scales: {
-        x: {
-          ticks: { color: 'white' }
-        },
-        y: {
-          ticks: { color: 'white' }
-        }
       }
-    }
-  });
+    });
+  }, 50); // Slight delay to ensure canvas is rendered
 }

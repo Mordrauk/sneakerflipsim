@@ -111,8 +111,20 @@ footer {
 }
 
 .chart-container {
-  margin-top: 30px;
   width: 100%;
+  max-width: 600px;
+  margin: 30px auto 0;
+  background-color: #222;
+  border-radius: 8px;
+  padding: 20px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.chart-container.fade-in {
+  display: block;
+  opacity: 1;
 }
 
 canvas#priceChart {
@@ -136,15 +148,4 @@ canvas#priceChart {
 
 .size-value {
   width: 65%;
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 0.6s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
 }
