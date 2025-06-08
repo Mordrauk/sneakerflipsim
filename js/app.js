@@ -59,50 +59,62 @@ function toggleHelp() {
 }
 
 function showChart() {
-  const ctx = document.getElementById("priceChart").getContext("2d");
-  const container = document.querySelector(".chart-container");
+  const container = document.getElementById("chartContainer");
+  const canvas = document.getElementById("priceChart");
 
-  if (window.priceChart instanceof Chart) {
-    window.priceChart.destroy();
-  }
-
-  window.priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
-      datasets: [{
-        label: 'Resale Price Trend ($)',
-        data: [148, 146, 145, 136, 138, 137, 156],
-        fill: false,
-        borderColor: '#00ccff',
-        backgroundColor: '#00ccff',
-        tension: 0.3,
-        pointRadius: 4,
-        pointHoverRadius: 6
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: 'white'
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: 'white' }
-        },
-        y: {
-          ticks: { color: 'white' }
-        }
-      }
-    }
-  });
+  // Reset canvas height to ensure it's sized correctly
+  canvas.width = 600;
+  canvas.height = 300;
 
   container.style.display = "block";
   container.classList.remove("fade-in");
-  void container.offsetWidth; // force reflow
+  void container.offsetWidth; // trigger reflow
   container.classList.add("fade-in");
+
+  // Delay rendering to allow the container to resize properly
+  setTimeout(() => {
+    if (window.priceChart && typeof window.priceChart.destroy === "function") {
+      window.priceChart.destroy();
+    }
+
+    const ctx = canvas.getContext("2d");
+
+    window.priceChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
+        datasets: [{
+          label: 'Resale Price Trend ($)',
+          data: [148, 146, 145, 136, 138, 137, 156],
+          fill: false,
+          borderColor: '#00ccff',
+          backgroundColor: '#00ccff',
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: 'white' }
+          },
+          y: {
+            ticks: { color: 'white' }
+          }
+        }
+      }
+    });
+  }, 50); // Allow 50ms for browser layout flush
 }
+
 
