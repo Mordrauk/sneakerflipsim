@@ -59,51 +59,50 @@ function toggleHelp() {
 }
 
 function showChart() {
+  const ctx = document.getElementById("priceChart").getContext("2d");
   const container = document.querySelector(".chart-container");
-  container.style.display = "block";
-  container.classList.remove("fade-in");
-  void container.offsetWidth; // Force reflow
-  container.classList.add("fade-in");
 
-  setTimeout(() => {
-    const ctx = document.getElementById("priceChart").getContext("2d");
+  if (window.priceChart instanceof Chart) {
+    window.priceChart.destroy();
+  }
 
-    if (window.priceChart) {
-      window.priceChart.destroy();
-    }
-
-    window.priceChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
-        datasets: [{
-          label: 'Resale Price Trend ($)',
-          data: [148, 146, 145, 136, 138, 137, 156],
-          fill: false,
-          borderColor: '#00ccff',
-          backgroundColor: '#00ccff',
-          tension: 0.3,
-          pointRadius: 4,
-          pointHoverRadius: 6
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            labels: {
-              color: 'white'
-            }
-          }
-        },
-        scales: {
-          x: {
-            ticks: { color: 'white' }
-          },
-          y: {
-            ticks: { color: 'white' }
+  window.priceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['6 mo ago', '5 mo', '4 mo', '3 mo', '2 mo', 'Last mo', 'Now'],
+      datasets: [{
+        label: 'Resale Price Trend ($)',
+        data: [148, 146, 145, 136, 138, 137, 156],
+        fill: false,
+        borderColor: '#00ccff',
+        backgroundColor: '#00ccff',
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white'
           }
         }
+      },
+      scales: {
+        x: {
+          ticks: { color: 'white' }
+        },
+        y: {
+          ticks: { color: 'white' }
+        }
       }
-    });
-  }, 50); // Slight delay to ensure canvas is rendered
+    }
+  });
+
+  container.style.display = "block";
+  container.classList.remove("fade-in");
+  void container.offsetWidth; // force reflow
+  container.classList.add("fade-in");
 }
+

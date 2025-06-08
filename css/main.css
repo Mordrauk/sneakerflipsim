@@ -111,15 +111,10 @@ footer {
 }
 
 .chart-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 30px auto 0;
-  background-color: #222;
-  border-radius: 8px;
-  padding: 20px;
   display: none;
-  opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  margin-top: 30px;
+  width: 100%;
+  text-align: left;
 }
 
 .chart-container.fade-in {
