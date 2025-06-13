@@ -80,7 +80,7 @@
       <h2>Join the Beta List</h2>
       <p>Get early access + first-month free for being a launch user.</p>
 
-      <form name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleBetaSubmit(event)">
+      <form name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleBetaSubmit(event); return false;">
         <input type="hidden" name="form-name" value="beta-signup" />
 
         <div style="display:none">
