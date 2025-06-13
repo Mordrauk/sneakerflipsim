@@ -47,10 +47,22 @@ function runSimulation() {
   showChart();
 }
 
-function joinBeta() {
-  const email = document.getElementById("email").value;
-  alert(`Thanks for signing up, ${email}!`);
+function handleBetaSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(new FormData(form)).toString(),
+  })
+    .then(() => {
+      document.getElementById("beta-success").style.display = "block";
+      form.reset();
+    })
+    .catch(() => alert("There was a problem. Please try again later."));
 }
+
 
 function toggleHelp() {
   const help = document.getElementById("conditionHelp");
