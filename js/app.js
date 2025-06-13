@@ -59,20 +59,27 @@ function toggleHelp() {
 
 function showChart() {
   const container = document.getElementById("chartContainer");
-  const ctx = document.getElementById("priceChart").getContext("2d");
+  const canvas = document.getElementById("priceChart");
+  const ctx = canvas.getContext("2d");
 
-  // Make visible with fade-in
+  // Ensure high-DPI clarity
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+  ctx.scale(dpr, dpr);
+
+  // Fade-in container
   container.style.display = "block";
   container.classList.remove("fade-in");
-  void container.offsetWidth; // force reflow
+  void container.offsetWidth;
   container.classList.add("fade-in");
 
-  // Destroy previous chart if exists
+  // Destroy previous chart if needed
   if (window.priceChart && typeof window.priceChart.destroy === "function") {
     window.priceChart.destroy();
   }
 
-  // Create new chart
+  // Draw chart
   window.priceChart = new Chart(ctx, {
     type: 'line',
     data: {
