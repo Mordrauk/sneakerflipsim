@@ -63,7 +63,6 @@ function handleBetaSubmit(e) {
     .catch(() => alert("There was a problem. Please try again later."));
 }
 
-
 function toggleHelp() {
   const help = document.getElementById("conditionHelp");
   help.classList.toggle("expanded");
@@ -72,26 +71,26 @@ function toggleHelp() {
 function showChart() {
   const container = document.getElementById("chartContainer");
   const canvas = document.getElementById("priceChart");
-  const ctx = canvas.getContext("2d");
 
-  // Ensure high-DPI clarity
+  // Ensure crisp rendering on high-DPI screens
   const dpr = window.devicePixelRatio || 1;
   canvas.width = canvas.offsetWidth * dpr;
   canvas.height = canvas.offsetHeight * dpr;
+  const ctx = canvas.getContext("2d");
   ctx.scale(dpr, dpr);
 
-  // Fade-in container
+  // Animate visibility
   container.style.display = "block";
   container.classList.remove("fade-in");
   void container.offsetWidth;
   container.classList.add("fade-in");
 
-  // Destroy previous chart if needed
+  // Clear any previous chart
   if (window.priceChart && typeof window.priceChart.destroy === "function") {
     window.priceChart.destroy();
   }
 
-  // Draw chart
+  // Render new chart
   window.priceChart = new Chart(ctx, {
     type: 'line',
     data: {

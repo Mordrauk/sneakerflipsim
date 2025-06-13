@@ -67,9 +67,8 @@
       <div id="result" class="result-box" style="display:none;"></div>
 
       <div class="chart-container" id="chartContainer" style="display: none;">
-		<canvas id="priceChart"></canvas>
-	  </div>
-
+        <canvas id="priceChart"></canvas>
+      </div>
     </div>
 
     <div class="section">
@@ -78,25 +77,25 @@
     </div>
 
     <div class="section">
-		<h2>Join the Beta List</h2>
-		<p>Get early access + first-month free for being a launch user.</p>
+      <h2>Join the Beta List</h2>
+      <p>Get early access + first-month free for being a launch user.</p>
 
-		<form name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleBetaSubmit(event)">
-		  <input type="hidden" name="form-name" value="beta-signup" />
-		  <input class="input-field" type="email" name="email" placeholder="Your email address" id="email" required />
-    
-		<div style="display:none">
-		  <label>Don’t fill this out: <input name="bot-field" /></label>
-		</div>
+      <form name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleBetaSubmit(event)">
+        <input type="hidden" name="form-name" value="beta-signup" />
 
-		<button class="btn btn-beta" type="submit">Join Beta</button>
-	  </form>
+        <div style="display:none">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </div>
 
-		<div id="beta-success" style="display:none; margin-top: 10px; color: #00cc66;">
-		🎉 Thanks for signing up!
-		</div>
-	</div>
+        <input class="input-field" type="email" name="email" placeholder="Your email address" id="email" required />
 
+        <button class="btn btn-beta" type="submit">Join Beta</button>
+      </form>
+
+      <div id="beta-success" style="display:none; margin-top: 10px; color: #00cc66;">
+        🎉 Thanks for signing up!
+      </div>
+    </div>
 
     <footer>
       © 2025 SimSage. All rights reserved.
